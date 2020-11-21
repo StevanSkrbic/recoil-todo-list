@@ -1,6 +1,12 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import {Container as TaskContainer, TextStyle as TaskTextStyle} from './Task'
+import {
+    Container as TaskContainer,
+    TextStyle as TaskTextStyle,
+    taskState,
+} from './Task'
+import {useRecoilState, useRecoilCallback} from 'recoil'
+import {tasksState} from './Tasks'
 
 const InsertInput = styled.input`
     width: 100%;
@@ -20,6 +26,18 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
     const [label, setLabel] = useState('')
+    const [tasks, setTasks] = useRecoilState(tasksState)
+    const insertTask = useRecoilCallback(({set}) => {
+        // set atom values
+        return (label: string) => {
+            const newTaskId = tasks.length
+            set(tasksState, [...tasks, newTaskId]) // adding new task as tasks.length, which is only one higher than current
+            set(taskState(newTaskId), {
+                label: label,
+                complete: false,
+            })
+        }
+    })
 
     return (
         <TaskContainer>
@@ -33,7 +51,7 @@ export const Input: React.FC = () => {
                 }}
                 onKeyUp={({keyCode}) => {
                     if (keyCode === 13) {
-                        // Insert new task
+                        insertTask(label)
                         setLabel('')
                     }
                 }}

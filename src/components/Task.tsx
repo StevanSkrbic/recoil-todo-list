@@ -2,6 +2,7 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 import checkIconSvg from './check.svg'
 import {Card} from './Card'
+import {atomFamily, useRecoilState} from 'recoil'
 
 export const TextStyle = css`
     font-size: 17px;
@@ -64,14 +65,27 @@ const Strikethrough = styled.div<{checked: boolean}>`
         `};
 `
 
+export const taskState = atomFamily({
+    // atomFamily function that returns an atom for specific item
+    key: 'task',
+    default: {
+        label: 'sdfsdf',
+        complete: false,
+    },
+})
+
 export const Task: React.FC<{id: number}> = ({id}) => {
-    const complete = false
-    const label = `Example task ${id}`
+    // const {task} = useRecoilValue(taskState(id)); // we pass in the id of the task that we want a value for
+    const [{complete, label}, setTask] = useRecoilState(taskState(id)) // we pass in the id of the task that we want a value for
+    // *taskState(id)* atomFamily is a function that returns an atom for specific item
 
     return (
         <Container
             onClick={() => {
-                // Toggle completed
+                setTask({
+                    label,
+                    complete: !complete,
+                })
             }}
         >
             <Check checked={complete}>

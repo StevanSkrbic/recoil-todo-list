@@ -4,7 +4,7 @@ import styled, {
     createGlobalStyle,
 } from 'styled-components'
 
-export const colors = {
+export const themeColors = {
     dark: {
         background: '#20252a',
         card: '#404348',
@@ -49,7 +49,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     children,
 }) => {
     return (
-        <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+        <StyledThemeProvider
+            theme={darkMode ? themeColors.dark : themeColors.light}
+        >
             {children}
         </StyledThemeProvider>
     )
