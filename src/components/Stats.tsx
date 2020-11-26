@@ -24,7 +24,7 @@ const StatLabel = styled.div`
     text-transform: uppercase;
 `
 
-const Stat: React.FC<{label: string; value: string | number}> = ({
+export const Stat: React.FC<{label: string; value: string | number}> = ({
     label,
     value,
 }) => {
@@ -43,13 +43,13 @@ const Divider = styled.div`
     opacity: 0.3;
 `
 
-const Container = styled(Card)`
+export const Container = styled(Card)`
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 20px;
 `
 
-const tasksCompleteSelector = selector({ // each time I enter or one of the tasks changes our selectors run
+export const tasksCompleteSelector = selector({ // each time I enter or one of the tasks changes our selectors run
     key: 'tasksComplete',
     get: ({get}) => {
         const tasksIds = get(tasksState)
@@ -72,17 +72,32 @@ const tasksRemaningSelector = selector({ // each time I enter or one of the task
 })
 
 
-export const Stats: React.FC = () => {
+const StatsComplete: React.FC = () => {
     const tasksComplete = useRecoilValue(tasksCompleteSelector) // u can pass either a selector or atom into useRecoilValue or useRecoilState
+
+    return (
+            <Stat label="Tasks Complete" value={tasksComplete} />
+    )
+}
+
+const StatsRemaining: React.FC = () => {
     const tasksRemaining = useRecoilValue(tasksRemaningSelector) // u can pass either a selector or atom into useRecoilValue or useRecoilState
 
     return (
+        <Stat label="Tasks Remaining" value={tasksRemaining} />
+    )
+}
+
+export const Stats: React.FC = () => {
+
+    return (
         <Container>
-            <Stat label="Tasks Complete" value={tasksComplete} />
+            <StatsComplete />
             <Divider />
-            <Stat label="Tasks Remaining" value={tasksRemaining} />
+            <StatsRemaining />
         </Container>
     )
 }
 
 // Use simple DERIVED state using RECOIL
+// its a great contendor to current state management

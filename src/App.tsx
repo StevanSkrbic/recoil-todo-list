@@ -5,6 +5,7 @@ import {Tasks} from './components/Tasks'
 import {ThemeProvider, GlobalStyles, Page} from './components/theme'
 import {Header, darkModeState} from './components/Header'
 import {useRecoilValue} from 'recoil'
+import {StatsDerived} from './components/StatsDerived';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <Stats />
             <Tasks />
             <Input />
+            <StatsDerived />
         </Page>
     )
 }
