@@ -51,10 +51,10 @@ export const Container = styled(Card)`
 
 export const tasksCompleteSelector = selector({ // each time I enter or one of the tasks changes our selectors run
     key: 'tasksComplete',
-    get: ({get}) => {
-        const tasksIds = get(tasksState)
+    get: ({get}) => { // returns recoil value
+        const tasksIds = get(tasksState) // will take the value of tasksState atom
         const tasks = tasksIds.map((id) => {
-            return get(taskState(id))
+            return get(taskState(id)) // will take the value of taskState atomFamily by id
         })
         return tasks.filter(task => task.complete).length
     },

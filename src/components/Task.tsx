@@ -64,8 +64,8 @@ const Strikethrough = styled.div<{checked: boolean}>`
             transform: scaleX(1);
         `};
 `
-
-export const taskState = atomFamily({
+export const taskState = atomFamily({ // Returns a function that returns a writeable RecoilState atom that you can call with id of specific atom and get
+    // that atom
     // atomFamily function that returns an atom for specific item
     key: 'task',
     default: {
