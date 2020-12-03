@@ -20,6 +20,7 @@ const Home = () => {
 }
 
 const App = () => {
+    // const [darkMode, setDarkMode] = React.useState(false);
     const darkMode = useRecoilValue(darkModeState) // useRecoilValue gives you only the value of the atom
     return (
         <ThemeProvider darkMode={darkMode}>

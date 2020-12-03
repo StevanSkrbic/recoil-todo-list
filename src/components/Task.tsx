@@ -2,7 +2,7 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 import checkIconSvg from './check.svg'
 import {Card} from './Card'
-import {atomFamily, useRecoilState} from 'recoil'
+import {atom, atomFamily, useRecoilState} from 'recoil'
 
 export const TextStyle = css`
     font-size: 17px;
@@ -73,6 +73,15 @@ export const taskState = atomFamily({ // Returns a function that returns a write
         complete: false,
     },
 })
+
+
+// export const taskWithId = () => (id) => ({
+//     key: `task_${id}`,
+//     default: {
+//         label: 'sdfsdf',
+//         complete: false,
+//     },
+// })
 
 export const Task: React.FC<{id: number}> = ({id}) => {
     // const {task} = useRecoilValue(taskState(id)); // we pass in the id of the task that we want a value for

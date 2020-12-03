@@ -71,7 +71,6 @@ const tasksRemaningSelector = selector({ // each time I enter or one of the task
     },
 })
 
-
 const StatsComplete: React.FC = () => {
     const tasksComplete = useRecoilValue(tasksCompleteSelector) // u can pass either a selector or atom into useRecoilValue or useRecoilState
 

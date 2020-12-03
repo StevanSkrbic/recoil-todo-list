@@ -26,7 +26,7 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
     const [label, setLabel] = useState('')
-    const [tasks, setTasks] = useRecoilState(tasksState)
+    const [tasks] = useRecoilState(tasksState)
     const insertTask = useRecoilCallback(({set}) => {
         // set()/reset() callbacks to update the current global state. The provided Snapshot represents the state when the callback is called,
         // set atom values
